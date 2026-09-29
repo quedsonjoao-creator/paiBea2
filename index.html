@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso Álbum de Memórias</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            750: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .font-handwriting {
+            font-family: 'Dancing Script', cursive;
+        }
+        .typewriter-cursor::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body class="bg-[#0f172a] text-white min-h-screen flex flex-col justify-between">
+
+    <!-- ADICIONE SUA MÚSICA AQUI: Coloque o arquivo .mp4 na mesma pasta e mude 'musicaFavorita.mp4' para o nome dele -->
+    <audio id="favorite-music" src="musicaFavorita.mp4" loop></audio>
+
+    <!-- Header / Navbar -->
+    <header class="bg-[#1e293b]/80 backdrop-blur-md border-b border-slate-700 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                    <i class="fa-solid fa-heart text-white"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight text-white">Nosso Álbum de Memórias</h1>
+                    <p class="text-xs text-slate-300">Momentos especiais guardados para sempre</p>
+                </div>
+            </div>
+            
+            <nav class="flex space-x-2 bg-[#0f172a] p-1 rounded-xl border border-slate-700">
+                <button onclick="switchTab('gallery')" id="btn-gallery" class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-indigo-600 text-white shadow-md">
+                    <i class="fa-solid fa-images mr-2"></i>Álbum
+                </button>
+                <button onclick="switchTab('journal')" id="btn-journal" class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-slate-300 hover:text-white">
+                    <i class="fa-solid fa-book-open mr-2"></i>Diário
+                </button>
+                <button onclick="switchTab('letter')" id="btn-letter" class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-slate-300 hover:text-white">
+                    <i class="fa-solid fa-envelope-open-text mr-2"></i>Carta Especial
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full">
+        
+        <!-- TAB 1: GALLERY (ÁLBUM) -->
+        <section id="tab-gallery" class="space-y-6">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[#1e293b] p-6 rounded-2xl border border-slate-700 shadow-xl">
+                <div>
+                    <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                        <span>Galeria com Papai</span>
+                        <i class="fa-solid fa-camera-retro text-indigo-400 text-lg"></i>
+                    </h2>
+                    <p class="text-sm text-slate-300 mt-1">Aqui estão os 6 espaços fixos iniciais e você também pode adicionar mais fotos abaixo.</p>
+                </div>
+                <button onclick="openPhotoModal()" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-medium rounded-xl shadow-lg shadow-indigo-600/30 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-plus"></i> Adicionar Foto Extra
+                </button>
+            </div>
+
+            <!-- 6 Espaços Fixos + Dinâmicos -->
+            <div id="photo-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <!-- Espaço Fixo 1 -->
+                <div class="group bg-[#1e293b] rounded-2xl overflow-hidden border border-slate-700 shadow-lg hover:border-indigo-500 transition-all duration-300 flex flex-col">
+                    <div class="h-64 bg-slate-800 relative overflow-hidden flex items-center justify-center">
+                        <img src="foto1.jpeg" alt="Foto 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-4 flex-grow flex flex-col justify-between">
+                        <p class="text-sm text-slate-200 font-medium">Para o melhor pai do mundo: obrigada por ser meu companheiro de aventuras, meu conselheiro e meu maior fã. Sua presença torna minha vida mais alegre e completa. Te amo!</p>
+                        <span class="text-xs text-indigo-400 mt-2 block"><i class="fa-regular fa-heart mr-1"></i> Espaço Fixo 1</span>
+                    </div>
+                </div>
+
+                <!-- Espaço Fixo 2 -->
+                <div class="group bg-[#1e293b] rounded-2xl overflow-hidden border border-slate-700 shadow-lg hover:border-indigo-500 transition-all duration-300 flex flex-col">
+                    <div class="h-64 bg-slate-800 relative overflow-hidden flex items-center justify-center">
+                        <img src="foto2.jpeg" alt="Foto 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-4 flex-grow flex flex-col justify-between">
+                        <p class="text-sm text-slate-200 font-medium">Amor de pai, presente em cada fase da minha vida. Desde pequena, você me ensinou o que é o amor verdadeiro. Obrigada por tudo, meu herói!</p>
+                        <span class="text-xs text-indigo-400 mt-2 block"><i class="fa-regular fa-heart mr-1"></i> Espaço Fixo 2</span>
+                    </div>
+                </div>
+
+                <!-- Espaço Fixo 3 -->
+                <div class="group bg-[#1e293b] rounded-2xl overflow-hidden border border-slate-700 shadow-lg hover:border-indigo-500 transition-all duration-300 flex flex-col">
+                    <div class="h-64 bg-slate-800 relative overflow-hidden flex items-center justify-center">
+                        <img src="foto3.jpeg" alt="Foto 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-4 flex-grow flex flex-col justify-between">
+                        <p class="text-sm text-slate-200 font-medium">Pai, nossa cumplicidade é algo que guardo com muito carinho. Seja na piscina, no estádio ou em casa, sua alegria é contagiante. Obrigada por ser esse paizão incrível!</p>
+                        <span class="text-xs text-indigo-400 mt-2 block"><i class="fa-regular fa-heart mr-1"></i> Espaço Fixo 3</span>
+                    </div>
+                </div>
+
+                <!-- Espaço Fixo 4 -->
+                <div class="group bg-[#1e293b] rounded-2xl overflow-hidden border border-slate-700 shadow-lg hover:border-indigo-500 transition-all duration-300 flex flex-col">
+                    <div class="h-64 bg-slate-800 relative overflow-hidden flex items-center justify-center">
+                        <img src="foto4.jpeg" alt="Foto 4" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-4 flex-grow flex flex-col justify-between">
+                        <p class="text-sm text-slate-200 font-medium">Pai, você é meu porto seguro, meu melhor amigo e meu maior exemplo. Obrigada por estar sempre ao meu lado, desde os mergulhos na piscina até as arquibancadas. Te amo infinitamente!</p>
+                        <span class="text-xs text-indigo-400 mt-2 block"><i class="fa-regular fa-heart mr-1"></i> Espaço Fixo 4</span>
+                    </div>
+                </div>
+
+                <!-- Espaço Fixo 5 -->
+                <div class="group bg-[#1e293b] rounded-2xl overflow-hidden border border-slate-700 shadow-lg hover:border-indigo-500 transition-all duration-300 flex flex-col">
+                    <div class="h-64 bg-slate-800 relative overflow-hidden flex items-center justify-center">
+                        <img src="foto5.jpeg" alt="Foto 5" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-4 flex-grow flex flex-col justify-between">
+                        <p class="text-sm text-slate-200 font-medium">Pai, nossa cumplicidade é algo que guardo com muito carinho. Seja na piscina, no estádio ou em casa, sua alegria é contagiante. Obrigada por ser esse paizão incrível!</p>
+                        <span class="text-xs text-indigo-400 mt-2 block"><i class="fa-regular fa-heart mr-1"></i> Espaço Fixo 5</span>
+                    </div>
+                </div>
+
+                <!-- Espaço Fixo 6 -->
+                <div class="group bg-[#1e293b] rounded-2xl overflow-hidden border border-slate-700 shadow-lg hover:border-indigo-500 transition-all duration-300 flex flex-col">
+                    <div class="h-64 bg-slate-800 relative overflow-hidden flex items-center justify-center">
+                        <img src="foto6.jpeg" alt="Foto 6" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-4 flex-grow flex flex-col justify-between">
+                        <p class="text-sm text-slate-200 font-medium">Memória guardada no coração</p>
+                        <span class="text-xs text-indigo-400 mt-2 block"><i class="fa-regular fa-heart mr-1"></i> Espaço Fixo 6</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: JOURNAL (DIÁRIO / ESPAÇO PARA ESCREVER) -->
+        <section id="tab-journal" class="hidden space-y-6">
+            <div class="bg-[#1e293b] p-6 rounded-2xl border border-slate-700 shadow-xl">
+                <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                    <span>Espaço de Diário e Escrita</span>
+                    <i class="fa-solid fa-pen-nib text-indigo-400 text-lg"></i>
+                </h2>
+                <p class="text-sm text-slate-300 mt-1">Escreva aqui seus pensamentos, recados ou memórias que deseja registrar.</p>
+                
+                <form id="journal-form" onsubmit="addJournalEntry(event)" class="mt-6 space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Título do Momento</label>
+                        <input type="text" id="journal-title" required placeholder="Ex: Um dia perfeito..." class="w-full px-4 py-3 bg-[#0f172a] border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-colors">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Sua Mensagem / Texto</label>
+                        <textarea id="journal-text" rows="4" required placeholder="Escreva o que está sentindo..." class="w-full px-4 py-3 bg-[#0f172a] border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-colors"></textarea>
+                    </div>
+                    <button type="submit" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-medium rounded-xl shadow-lg shadow-indigo-600/30 transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-bookmark"></i> Salvar no Diário
+                    </button>
+                </form>
+            </div>
+
+            <div id="journal-list" class="space-y-4">
+                <!-- Registros salvos dinamicos -->
+            </div>
+        </section>
+
+        <!-- TAB 3: LETTER (CARTA COM MÁQUINA DE ESCREVER + MÚSICA) -->
+        <section id="tab-letter" class="hidden space-y-6">
+            <div class="max-w-3xl mx-auto bg-[#1e293b] p-8 sm:p-12 rounded-3xl border border-slate-700 shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 transform translate-x-8 -translate-y-8 w-32 h-32 bg-indigo-600/10 rounded-full blur-2xl"></div>
+                
+                <div class="text-center mb-8">
+                    <span class="text-xs uppercase tracking-widest text-indigo-400 font-bold block mb-2">Mensagem Especial</span>
+                    <h2 class="text-3xl font-bold text-white">Uma Carta Para Você</h2>
+                    <p class="text-sm text-slate-300 mt-2">Clique no botão abaixo para iniciar a digitação automática e tocar a música favorita.</p>
+                </div>
+
+                <div class="flex justify-center gap-4 mb-8">
+                    <button id="start-typewriter" onclick="startTypewriter()" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl shadow-lg shadow-indigo-600/30 transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-play"></i> Iniciar Carta e Música
+                    </button>
+                    <button id="reset-typewriter" onclick="resetTypewriter()" class="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold rounded-xl border border-slate-700 transition-all hidden items-center gap-2">
+                        <i class="fa-solid fa-rotate-right"></i> Reiniciar
+                    </button>
+                </div>
+
+                <div class="bg-[#0f172a] p-6 sm:p-8 rounded-2xl border border-slate-700 min-h-[220px] shadow-inner">
+                    <p id="typewriter-text" class="text-lg sm:text-xl text-slate-200 font-handwriting leading-relaxed whitespace-pre-line"></p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#1e293b]/50 border-t border-slate-800 text-center py-6 text-sm text-slate-400 mt-12">
+        <p>Feito com muito carinho para guardar nossas melhores recordações.</p>
+    </footer>
+
+    <!-- Modal para Adicionar Foto Extra -->
+    <div id="photo-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-[#1e293b] border border-slate-700 w-full max-w-md rounded-2xl p-6 shadow-2xl relative">
+            <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-camera text-indigo-400"></i> Adicionar Nova Foto
+            </h3>
+            <form onsubmit="addPhoto(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Link da Imagem (URL)</label>
+                    <input type="url" id="photo-url" required placeholder="https://exemplo.com/foto.jpg" class="w-full px-4 py-3 bg-[#0f172a] border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Legenda ou Descrição</label>
+                    <input type="text" id="photo-caption" required placeholder="Ex: Passeio inesquecível..." class="w-full px-4 py-3 bg-[#0f172a] border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500">
+                </div>
+                <div class="flex justify-end gap-3 pt-2">
+                    <button type="button" onclick="closePhotoModal()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium rounded-xl transition-all">Cancelar</button>
+                    <button type="submit" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-medium rounded-xl shadow-lg shadow-indigo-600/30 transition-all">Adicionar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Tab Navigation
+        function switchTab(tabName) {
+            document.getElementById('tab-gallery').classList.add('hidden');
+            document.getElementById('tab-journal').classList.add('hidden');
+            document.getElementById('tab-letter').classList.add('hidden');
+
+            document.getElementById('btn-gallery').className = "px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-slate-300 hover:text-white";
+            document.getElementById('btn-journal').className = "px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-slate-300 hover:text-white";
+            document.getElementById('btn-letter').className = "px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-slate-300 hover:text-white";
+
+            document.getElementById('tab-' + tabName).classList.remove('hidden');
+            document.getElementById('btn-' + tabName).className = "px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-indigo-600 text-white shadow-md";
+
+            // Se sair da aba letter, para a música e digitação
+            if(tabName !== 'letter') {
+                stopAudio();
+            }
+        }
+
+        // Photo Modal Management
+        function openPhotoModal() {
+            document.getElementById('photo-modal').classList.remove('hidden');
+        }
+        function closePhotoModal() {
+            document.getElementById('photo-modal').classList.add('hidden');
+        }
+
+        function addPhoto(event) {
+            event.preventDefault();
+            const url = document.getElementById('photo-url').value;
+            const caption = document.getElementById('photo-caption').value;
+
+            const grid = document.getElementById('photo-grid');
+            const card = document.createElement('div');
+            card.className = "group bg-[#1e293b] rounded-2xl overflow-hidden border border-slate-700 shadow-lg hover:border-indigo-500 transition-all duration-300 flex flex-col";
+            card.innerHTML = `
+                <div class="h-64 bg-slate-800 relative overflow-hidden flex items-center justify-center">
+                    <img src="${url}" alt="${caption}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="p-4 flex-grow flex flex-col justify-between">
+                    <p class="text-sm text-slate-200 font-medium">${caption}</p>
+                    <span class="text-xs text-indigo-400 mt-2 block"><i class="fa-regular fa-heart mr-1"></i> Nova Memória</span>
+                </div>
+            `;
+            grid.appendChild(card);
+            closePhotoModal();
+            document.getElementById('photo-url').value = '';
+            document.getElementById('photo-caption').value = '';
+        }
+
+        // Journal Management
+        let journalEntries = [
+            { title: "Nossa Primeira Viagem", text: "Foi um dos fins de semana mais incríveis que já tivemos, cada detalhe tornou tudo mágico." }
+        ];
+
+        function renderJournal() {
+            const list = document.getElementById('journal-list');
+            list.innerHTML = '';
+            journalEntries.forEach((entry, index) => {
+                const item = document.createElement('div');
+                item.className = "bg-[#1e293b] p-6 rounded-2xl border border-slate-700 shadow-md relative";
+                item.innerHTML = `
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-white">${entry.title}</h3>
+                        <button onclick="deleteJournal(${index})" class="text-slate-400 hover:text-red-400 transition-colors"><i class="fa-solid fa-trash-can"></i></button>
+                    </div>
+                    <p class="text-slate-300 text-sm whitespace-pre-line">${entry.text}</p>
+                `;
+                list.appendChild(item);
+            });
+        }
+
+        function addJournalEntry(event) {
+            event.preventDefault();
+            const title = document.getElementById('journal-title').value;
+            const text = document.getElementById('journal-text').value;
+
+            journalEntries.unshift({ title, text });
+            renderJournal();
+            document.getElementById('journal-title').value = '';
+            document.getElementById('journal-text').value = '';
+        }
+
+        function deleteJournal(index) {
+            journalEntries.splice(index, 1);
+            renderJournal();
+        }
+
+        renderJournal();
+
+        // Typewriter & Favorite Music Control
+        const letterText = "Querido pai,\n\nEscrevi este pequeno espaço para registrar o quanto cada momento ao seu lado é precioso. Assim como esta carta vai se revelando letra por letra, meu carinho por você só cresce a cada dia.\n\nObrigado por todas as risadas, conversas e memórias inesquecíveis. Que este álbum seja apenas o começo de uma linda história.\n\nCom todo o meu amor e gratidão.";
+        
+        let typingTimeout = null;
+
+        function startTypewriter() {
+            const btnStart = document.getElementById('start-typewriter');
+            const btnReset = document.getElementById('reset-typewriter');
+            const textContainer = document.getElementById('typewriter-text');
+
+            btnStart.classList.add('hidden');
+            btnReset.classList.remove('hidden');
+            textContainer.classList.add('typewriter-cursor');
+            textContainer.innerHTML = '';
+
+            playFavoriteMusic();
+
+            let i = 0;
+            function type() {
+                if (i < letterText.length) {
+                    textContainer.innerHTML += letterText.charAt(i) === '\n' ? '<br>' : letterText.charAt(i);
+                    i++;
+                    typingTimeout = setTimeout(type, 45);
+                } else {
+                    textContainer.classList.remove('typewriter-cursor');
+                }
+            }
+            type();
+        }
+
+        function resetTypewriter() {
+            clearTimeout(typingTimeout);
+            stopAudio();
+            document.getElementById('typewriter-text').innerHTML = '';
+            document.getElementById('typewriter-text').classList.remove('typewriter-cursor');
+            document.getElementById('start-typewriter').classList.remove('hidden');
+            document.getElementById('reset-typewriter').classList.add('hidden');
+        }
+
+        // Funções da Música Favorita
+        function playFavoriteMusic() {
+            const music = document.getElementById('favorite-music');
+            if (music) {
+                music.currentTime = 0;
+                music.play().catch(error => {
+                    console.log("O navegador bloqueou a reprodução automática de áudio sem interação direta.");
+                });
+            }
+        }
+
+        function stopAudio() {
+            const music = document.getElementById('favorite-music');
+            if (music) {
+                music.pause();
+                music.currentTime = 0;
+            }
+        }
+    </script>
+</body>
+</html>
+```[cite: 1]
